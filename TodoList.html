@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo List</title>
+</head>
+<body>
+	<h1>Todo List</h1>
+	
+	<input id="input"type="text" name="" placeholder="enter todo">
+	<button id="button">Add To List</button>
+
+	<ul id="ul">
+		<li id="li">Things to do today!!!</li>
+	</ul>
+
+	<script type="text/javascript">
+		var button = document.querySelector("button");
+		var ul = document.querySelector("#ul");
+		var input = document.querySelector("#input");
+
+
+		function checkInput(){
+			return input.value.length;
+		}
+
+		function createLi(){
+			var li = document.createElement("li");
+			li.appendChild(document.createTextNode(input.value));
+			ul.appendChild(li);
+			input.value = "";
+		}
+
+		function createLiAfterEnter(event){
+			if(checkInput() > 0 && event.which === 13){
+				createLi();
+			}
+		}
+
+		function createAfterClick(){
+			if(checkInput() > 0){
+				createLi();
+			}
+		}
+				
+			
+		input.addEventListener("keypress", createLiAfterEnter);
+		button.addEventListener("click", createAfterClick);
+	</script>
+</body>
+</html>

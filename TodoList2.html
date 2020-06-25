@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo List 2</title>
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<style type="text/css">
+		body{
+			margin-left: 40%;
+			background-color: gray;
+		}
+		.done{
+			text-decoration: line-through;
+		}
+		span{
+			margin-left: 20px;
+		}
+		span:hover{
+			cursor: pointer;
+		}
+
+	</style>
+</head>
+<body>
+	<h1>Todo List</h1>
+	<input class="addTodo" type="text" placeholder="add todo..." name="">
+	<button class="submit">Submit</button>
+	<ol class="ol">
+		<!-- <li class="lis">Today's Todo's</li> -->
+		<!-- <span class="span"><i class="fa fa-trash-o" aria-hidden="true"></i></span> -->
+	</ol>
+	
+	<script type="text/javascript">
+		
+		var addTodo = document.querySelector(".addTodo");
+		var submit = document.querySelector(".submit");
+		var ol = document.querySelector(".ol");
+		var lis = document.querySelector(".lis");
+
+		function checkInput(){
+			return addTodo.value.length;
+		}
+
+		function addTodoList(){
+			//var btn = document.createElement("button");
+			var span = document.createElement("span");
+			// btn.innerHTML = "Delete";
+			// btn.onclick = deleteLi;
+
+			span.innerHTML = "<i class='fa fa-trash-o' aria-hidden='true'></i>";
+			span.style.color = "red";
+			span.onclick = deleteLi;
+
+			var li = document.createElement("li");
+			li.appendChild(document.createTextNode(addTodo.value));
+			li.innerHTML = li.innerHTML + " ";
+			li.appendChild(span);
+			li.onclick = doneTodo;
+			ol.appendChild(li);
+			addTodo.value = "";
+		}	
+		
+		function addAfterClick(){
+			if(checkInput() > 0){
+				addTodoList();
+			}
+		}
+
+		function addAfterEnter(event){
+			if(checkInput() > 0 && event.which === 13){
+				addTodoList();
+			}
+		}
+
+		function deleteLi(){
+			this.parentNode.remove();
+		}
+		
+		function doneTodo(){
+			this.classList.toggle("done");
+		}
+		submit.addEventListener("click", addAfterClick);
+		addTodo.addEventListener("keypress", addAfterEnter);
+
+	</script>
+</body>
+</html>
